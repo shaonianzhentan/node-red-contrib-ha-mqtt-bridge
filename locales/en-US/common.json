@@ -1,0 +1,9 @@
+{
+    "label": {
+        "mqttServer": "MQTT Server",
+        "hostName": "Remote Host",
+        "entityName": "Entity Name",
+        "deviceName": "Device Name",
+        "config": "Configuration"
+    }
+}

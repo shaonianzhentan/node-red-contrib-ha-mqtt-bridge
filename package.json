@@ -1,0 +1,30 @@
+{
+  "name": "node-red-contrib-ha-mqtt-bridge",
+  "version": "1.0.0",
+  "description": "在本地和云端生成HomeAssistant的MQTT实体",
+  "keywords": [
+    "node-red",
+    "ha-mqtt",
+    "ha-mqtt-bridge",
+    "homeassistant",
+    "home-assistant"
+  ],
+  "node-red": {
+    "nodes": {
+      
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaonianzhentan/node-red-contrib-ha-mqtt-bridge.git"
+  },
+  "author": "shaonianzhentan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shaonianzhentan/node-red-contrib-ha-mqtt-bridge/issues"
+  },
+  "homepage": "https://github.com/shaonianzhentan/node-red-contrib-ha-mqtt-bridge#readme"
+}

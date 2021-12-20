@@ -1,0 +1,9 @@
+{
+    "label": {
+        "mqttServer": "MQTT",
+        "hostName": "远程主机",
+        "entityName": "实体名称",
+        "deviceName": "设备名称",
+        "config": "配置"
+    }
+}

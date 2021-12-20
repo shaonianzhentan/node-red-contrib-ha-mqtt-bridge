@@ -1,0 +1,23 @@
+<script type="text/html" data-template-name="ha-mqtt-bridge-broker">
+    <div class="form-row">
+        <label for="node-input-server" data-i18n="node-red-contrib-ha-mqtt/common:label.mqttServer"></label>
+        <select id="node-input-server"></select>
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-host" data-i18n="node-red-contrib-ha-mqtt/common:label.hostName"></label>
+        <input type="text" id="node-config-input-host" data-i18n="[placeholder]node-red-contrib-ha-mqtt/common:label.hostName">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('ha-mqtt-bridge-broker', {
+        category: 'config',
+        defaults: {
+            server: { value: "", type: "mqtt-broker", required: true },
+            host: { value: "", required: true }
+        },
+        label: function () {
+            return this.host.trim();
+        }
+    });
+</script>
