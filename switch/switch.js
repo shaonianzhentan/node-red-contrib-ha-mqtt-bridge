@@ -1,49 +1,44 @@
 module.exports = function (RED) {
     RED.nodes.registerType('ha-mqtt-bridge-switch', function (cfg) {
         RED.nodes.createNode(this, cfg);
-        this.server = RED.nodes.getNode(cfg.server);
-        if (this.server) {
-            this.server.register(this)
-            const ha = new HomeAssistant(this, cfg)
-            const node = this
+        const node = this
+        const server = RED.nodes.getNode(cfg.server);
+        if (server) {
+            const deviceNode = RED.nodes.getNode(cfg.device);
+            // 获取配置
+            const { name, unique_id, state_topic, json_attr_t, command_topic, discovery_topic } = server.getConfig('switch', cfg.name)
+            server.publish_config(discovery_topic, {
+                name,
+                unique_id,
+                state_topic,
+                json_attr_t,
+                command_topic,
+                payload_on: "ON",
+                payload_off: "OFF",
+                state_on: "ON",
+                state_off: "OFF",
+                device: deviceNode.device_info
+            })
+
             node.on('input', function (msg) {
                 const { payload, attributes } = msg
                 try {
                     if (payload) {
-                        ha.publish(ha.config.state_topic, payload, RED._(`node-red-contrib-ha-mqtt/common:publish.state`))
+                        server.publish(state_topic, payload, RED._(`node-red-contrib-ha-mqtt-bridge/common:publish.state`))
                     }
                     if (attributes) {
-                        ha.publish(ha.config.json_attr_t, attributes, RED._(`node-red-contrib-ha-mqtt/common:publish.attributes`))
+                        server.publish(json_attr_t, attributes, RED._(`node-red-contrib-ha-mqtt-bridge/common:publish.attributes`))
                     }
                 } catch (ex) {
                     node.status({ fill: "red", shape: "ring", text: ex });
                 }
             })
-            ha.subscribe(ha.config.command_topic, (payload) => {
+            server.subscribe(command_topic, (payload) => {
                 node.send({ payload })
-                ha.publish(ha.config.state_topic, payload, RED._(`node-red-contrib-ha-mqtt/common:publish.state`))
+                server.publish(state_topic, payload)
             })
-
-            try {
-                const discoveryConfig = {
-                    command_topic: ha.config.command_topic,
-                    payload_on: "ON",
-                    payload_off: "OFF",
-                    state_on: "ON",
-                    state_off: "OFF"
-                }
-                if (cfg.device) {
-                    const deviceNode = RED.nodes.getNode(cfg.device);
-                    discoveryConfig['device'] = deviceNode.device_info
-                }
-                ha.discovery(discoveryConfig, () => {
-                    this.status({ fill: "green", shape: "ring", text: `node-red-contrib-ha-mqtt/common:publish.config` });
-                })
-            } catch (ex) {
-                this.status({ fill: "red", shape: "ring", text: `${ex}` });
-            }
         } else {
-            this.status({ fill: "red", shape: "ring", text: `node-red-contrib-ha-mqtt/common:errors.mqttNotConfigured` });
+            this.status({ fill: "red", shape: "ring", text: `node-red-contrib-ha-mqtt-bridge/common:errors.mqttNotConfigured` });
         }
     })
 }

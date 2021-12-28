@@ -1,0 +1,28 @@
+<script type="text/html" data-template-name="ha-mqtt-bridge-bridge">
+    <div class="form-row">
+        <label for="node-input-local">MQTT 本地</label>
+        <select id="node-input-local"></select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-cloud">MQTT 云</label>
+        <select id="node-input-cloud"></select>
+    </div>
+</script>
+<script type="text/javascript">
+    RED.nodes.registerType('ha-mqtt-bridge-bridge', {
+        category: RED._("node-red-contrib-ha-mqtt-bridge/common:category"),
+        color: '#41bdf5',
+        icon: "font-awesome/fa-toggle-on",
+        paletteLabel: 'bridge',
+        defaults: {
+            local: { value: "", type: "mqtt-broker", required: true },
+            cloud: { value: "", type: "mqtt-broker", required: true }
+        },
+        inputs: 0,
+        outputs: 0,
+        inputLabels: RED._("node-red-contrib-ha-mqtt-bridge/common:ioLabels.state"),
+        label: function () {
+            return this.name || "bridge";
+        }
+    });
+</script>

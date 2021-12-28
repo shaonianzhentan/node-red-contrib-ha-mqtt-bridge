@@ -11,7 +11,12 @@
   ],
   "node-red": {
     "nodes": {
-      
+      "common": "common.js",
+      "bridge": "bridge/bridge.js",
+      "broker": "broker/broker.js",
+      "discovery": "discovery/discovery.js",
+      "device": "device/device.js",
+      "switch": "switch/switch.js"
     }
   },
   "scripts": {

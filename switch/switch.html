@@ -1,25 +1,25 @@
 <script type="text/html" data-template-name="ha-mqtt-bridge-switch">
     <div class="form-row">
-        <label for="node-input-server" data-i18n="node-red-contrib-ha-mqtt/common:label.mqttServer"></label>
+        <label for="node-input-server" data-i18n="node-red-contrib-ha-mqtt-bridge/common:label.mqttServer"></label>
         <select id="node-input-server"></select>
     </div>
     <div class="form-row">
-        <label for="node-input-device" data-i18n="node-red-contrib-ha-mqtt/common:label.deviceName"></label>
-        <select type="text" id="node-input-device" data-i18n="[placeholder]node-red-contrib-ha-mqtt/common:label.deviceName"></select>
+        <label for="node-input-device" data-i18n="node-red-contrib-ha-mqtt-bridge/common:label.deviceName"></label>
+        <select type="text" id="node-input-device" data-i18n="[placeholder]node-red-contrib-ha-mqtt-bridge/common:label.deviceName"></select>
     </div>
     <div class="form-row">
-        <label for="node-input-name" data-i18n="node-red-contrib-ha-mqtt/common:label.entityName"></label>
-        <input type="text" id="node-input-name" data-i18n="[placeholder]node-red-contrib-ha-mqtt/common:label.entityName">
+        <label for="node-input-name" data-i18n="node-red-contrib-ha-mqtt-bridge/common:label.entityName"></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]node-red-contrib-ha-mqtt-bridge/common:label.entityName">
     </div>
     <div class="form-row">
-        <label for="node-input-config" data-i18n="node-red-contrib-ha-mqtt/common:label.config"></label>        
-        <input type="text" id="node-input-config" data-i18n="[placeholder]node-red-contrib-ha-mqtt/common:label.config">
+        <label for="node-input-config" data-i18n="node-red-contrib-ha-mqtt-bridge/common:label.config"></label>        
+        <input type="text" id="node-input-config" data-i18n="[placeholder]node-red-contrib-ha-mqtt-bridge/common:label.config">
     </div>
 </script>
 <script type="text/javascript">
     RED.nodes.registerType('ha-mqtt-bridge-switch', {
-        category: RED._("node-red-contrib-ha-mqtt/common:homeAssistantCategory"),
-        color: '#C0DEED',
+        category: RED._("node-red-contrib-ha-mqtt-bridge/common:category"),
+        color: '#41bdf5',
         icon: "font-awesome/fa-toggle-on",
         paletteLabel: 'switch',
         defaults: {
@@ -30,7 +30,7 @@
         },
         inputs: 1,
         outputs: 1,
-        inputLabels: RED._("node-red-contrib-ha-mqtt/common:ioLabels.state"),
+        inputLabels: RED._("node-red-contrib-ha-mqtt-bridge/common:ioLabels.state"),
         label: function () {
             return this.name || "switch";
         },

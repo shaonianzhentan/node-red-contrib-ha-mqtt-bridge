@@ -9,7 +9,6 @@ payload:
   payload: online
 ```
 
-
 本地发布
 ```yaml
 topic: 'ha-mqtt-bridge/111.111.111.111'
