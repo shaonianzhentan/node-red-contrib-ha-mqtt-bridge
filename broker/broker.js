@@ -30,9 +30,7 @@ module.exports = function (RED) {
 
             // 订阅
             this.subscribe = (topic, callback) => {
-                console.log(topic)
                 server.subscribe(topic, { qos: 0 }, function (mtopic, mpayload, mpacket) {
-                    console.log(mpayload)
                     callback(mpayload.toString())
                 })
             }

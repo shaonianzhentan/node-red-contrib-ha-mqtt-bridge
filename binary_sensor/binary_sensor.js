@@ -1,22 +1,18 @@
 module.exports = function (RED) {
-    RED.nodes.registerType('ha-mqtt-bridge-switch', function (cfg) {
+    RED.nodes.registerType('ha-mqtt-bridge-binary_sensor', function (cfg) {
         RED.nodes.createNode(this, cfg);
         const node = this
         const server = RED.nodes.getNode(cfg.server);
         if (server) {
             const deviceNode = RED.nodes.getNode(cfg.device);
             // 获取配置
-            const { name, unique_id, state_topic, json_attr_t, command_topic, discovery_topic } = server.getConfig('switch', cfg.name)
+            const { name, unique_id, state_topic, json_attr_t, discovery_topic } = server.getConfig('binary_sensor', cfg.name)
             server.publish_config(discovery_topic, {
                 name,
                 unique_id,
                 state_topic,
                 json_attr_t,
-                command_topic,
-                payload_on: "ON",
-                payload_off: "OFF",
-                state_on: "ON",
-                state_off: "OFF",
+                device_class: "motion",
                 ...cfg.config,
                 device: deviceNode.device_info
             })
@@ -33,10 +29,6 @@ module.exports = function (RED) {
                 } catch (ex) {
                     node.status({ fill: "red", shape: "ring", text: ex });
                 }
-            })
-            server.subscribe(command_topic, (payload) => {
-                node.send({ payload })
-                server.publish(state_topic, payload)
             })
         } else {
             this.status({ fill: "red", shape: "ring", text: `node-red-contrib-ha-mqtt-bridge/common:errors.mqttNotConfigured` });
